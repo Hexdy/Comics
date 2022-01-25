@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+        <link rel="stylesheet" href="../static/css/general.css"  type="text/css">
+        <link rel="stylesheet" href="../static/css/report.css"  type="text/css">
+    <script src="../static/JS/general.js">
+
+    {% if error%}
+    alert("{{error}}");
+    {%endif%}
+    </script>
+
+    <title>Reporte De Fallos</title>
+</head>
+<body onload="back('{{fondo}}')">
+<div class="atras">
+<a href="/" class="atras_btn"><span>Atras</span></a>
+</div>
+<div class="main">
+    <div class="reporte">
+        <form id="form" action="/enviar_reporte" method="post">
+            <div class="texto">
+                <p>
+                    Parrafo<br>
+                    Parrafo<br>
+                    Parrafo<br>
+                    Parrafo<br>
+                    Parrafo<br>
+                    Parrafo<br>
+                    Parrafo<br>
+                    Parrafo<br>
+                    Parrafo<br>
+                    Parrafo<br>
+                    Parrafo<br>
+                    Parrafo<br>
+                    Parrafo<br>
+                    Parrafo<br>
+                    Parrafoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaqqqqqqqqqqqqqqqqqq<br>
+                    Parrafo<br>
+                    Parrafo<br>
+                    Parrafo<br>
+                    Parrafo<br>
+                    Parrafo<br>
+                    Parrafo<br>
+                    Parrafo<br>
+                    Parrafo<br>
+                    Parrafo<br>
+                </p>
+            </div>
+            <div class="escribir">
+            <input class="submit_on_enter" placeholder="¿Algun problema?" type="text" value="" >
+            </div>
+        </form>
+    </div>
+    <div class="reportes_comunes">
+        <p class="reporte_elegido"></p>
+        <a>a</a>
+        <a>a</a>
+        <a>a</a>
+        <a>a</a>
+        <a>a</a>
+        <a>a</a>
+        <a>a</a>
+        <a>a</a>
+        <a>a</a>
+        <a>a</a>
+        <a>a</a>
+        <a>a</a>
+
+    </div>
+
+
+</div>
+
+
+
+<div class="logo_sembrando">
+<p>Proyecto para: </p>
+<a href="https://sembrandotic.com/?redirect=0 " target="_blank"><img class="sembrando" src="static/img/sembrando.png"></a>
+</div>
+
+</body>
+</html>

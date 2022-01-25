@@ -1,0 +1,134 @@
+@import url('http://fonts.cdnfonts.com/css/minecraft-4');
+
+body{
+overflow:hidden;
+    margin: 0 0px !important;
+
+}
+  .nav{
+float:left;
+  height:200px;
+  width:220px;
+  display: inline;
+margin-left:0;
+}
+#agregado_comic{
+position:relative;
+height:8ch;
+}
+.delete{
+color:red;
+font-family: 'Minecraft', sans-serif;
+}
+.comic_form{
+position:relative;
+width:900px;
+height:100px;
+display:flex;
+flex-direction:column;
+}
+#submit_comic{
+position:relative;
+bottom:0;
+height:3ch;
+width:80px;
+}
+.input_comic{
+border:2px solid black;
+}
+  .tabla{
+right:0;
+border: 2px solid #000;
+display:inline-block;
+overflow-y:scroll;
+width: 800px;
+height:250px;
+}
+  .tabla2{
+right:0;
+border: 2px solid #000;
+display:inline-block;
+overflow-y:scroll;
+width: 468px;
+height:250px;
+}
+.tabla3{
+right:1px;
+border: 2px solid #000;
+display:inline-block;
+overflow:scroll;
+width: 1000px;
+height:250px;
+}
+.linea td{
+max-width:100px;
+overflow:hidden;
+}
+button, input[value=Buscar]{
+position:relative;
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;}
+
+.tabla::-webkit-scrollbar{
+display:none;
+}
+
+.tabla2::-webkit-scrollbar{
+display:none;
+}
+.tabla3::-webkit-scrollbar{
+display:none;
+}
+
+th,td{
+height:7%;
+width: 20%;
+border: 2px solid #000;
+}
+.linea{
+background-color: hsla(0,10%,80%,.5);
+
+}
+.columna{
+position: sticky;
+  top: 1px;
+  background:white;
+  }
+.section{
+width:100%
+height:100vh;
+position:relative;
+overflow-x:scroll;
+overflow-y:hidden;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(90, 90, 90);
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0);
+}
+.users{
+}
+.lists{
+}
+.bloque_1{
+top:0;
+display:flex;
+flex-direction:column;
+  left: 220px;
+  position:absolute;
+}
+
+

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>tabla</title>
+    <link rel="stylesheet" href="..\static\css\lista.css" type="text/css">
+    <link rel="stylesheet" href="..\static\css\scroll.css" type="text/css">
+    <link rel="stylesheet" href="..\static\css\general.css" type="text/css">
+    <script src="..\static\JS\general.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/fullpage.min.js" integrity="sha512-gSf3NCgs6wWEdztl1e6vUqtRP884ONnCNzCpomdoQ0xXsk06lrxJsR7jX5yM/qAGkPGsps+4bLV5IEjhOZX+gg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="..\static\JS\lista.js">
+
+
+    </script>
+    <script>
+    {% if error%}
+    alert("{{error}}")
+    {%endif%}
+
+    </script>
+
+</head>
+<body onload="tittle();back('{{fondo}}');">
+<div id="fullpage">
+<div class="section s1">
+<div class="atras">
+<a href="/" class="atras_btn"><span>Atras</span></a>
+</div>
+<form id="formulario" method="post" action="/busqueda"> <!---Usuario/Nav--->
+
+    <div class="nav">
+        <button onClick="window.location.reload();">Recargar pagina</button>
+        <p>Selecciona la columna:</p>
+        <select id="seleccion" name="seleccion" class="seleccion" form="formulario" required>
+            <option value="" selected>---</option>
+            <option value="usuarioID">UsuarioID</option>
+            <option value="nombre">Nombre</option>
+            <option value="email">Email</option>
+            <!--Quite la opcion de rol ya que por alguna razon SOLO rol da problemas al buscar el rol de usuario-->
+            <option value="contenidoExplicito">Contenido Explicito</option>
+        </select>
+
+        <p>¿Que quieres buscar?</p>
+        <input id="buscar" name="buscar" class="buscar" type="text" value="" placeholder="Buscar">
+        <div id="submit">
+            <input type="submit" value="Buscar">
+        </div>
+    </div>
+</form>
+    <div class="bloque_1">
+<div class="users"><!--Usuario/tabla-->
+
+    <table id="users" class="tabla">
+
+        {%if users == None%}
+        <tr><th>No hay un usuario con esos parámetros</th></tr>
+        {%else%}
+        {% if 'usuarioID' in users %}
+        <tr class="columna">
+            <th>UsuarioID</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Contenido Explicito</th>
+            <th>Rol</th>
+            <th>Eliminar</th>
+        </tr>
+            <tr class="linea" id="user{{users['usuarioID']}}">
+            <td><a title="" onclick="copiar(this)">{{users['usuarioID']}}</a></td>
+            <td><a title="" onclick="copiar(this)">{{users['nombre']}}</a></td>
+            <td><a title="" onclick="copiar(this)">{{users['email']}}</a></td>
+            <td><a title="" onclick="copiar(this)">{{users['contenidoExplicito']}}</a></td>
+            <td><a title="" onclick="copiar(this)">{{users['rol']}}</a></td>
+
+            <td><a title="" class="delete" href="javascript:void(0)" onclick="eliminar_usuario({{users['usuarioID']}},{{idu}})">Eliminar</a></td>
+
+        </tr>
+        {%else%}
+<tr class="columna">
+            <th>UsuarioID</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Contenido Explicito</th>
+            <th>Rol</th>
+            <th>Eliminar</th>
+        </tr>
+            {% for value in users.values()%}
+            <tr class="linea" id="user{{value['usuarioID']}}">
+                <td><a title="" onclick="copiar(this)">{{value['usuarioID']}}</a></td>
+                <td><a title="" onclick="copiar(this)">{{value['nombre']}}</a></td>
+                <td><a title="" onclick="copiar(this)">{{value['email']}}</a></td>
+                <td><a title="" onclick="copiar(this)">{{value['contenidoExplicito']}}</a></td>
+                <td><a title="" onclick="copiar(this)">{{value['rol']}}</a></td>
+            <td><a title="" class="delete" href="javascript:void(0)" onclick="eliminar_usuario({{value['usuarioID']}},{{idu}})">Eliminar</a></td>
+
+            </tr>
+            {%endfor%}
+        {%endif%}
+        {%endif%}
+    </table>
+
+</div>
+
+<div class="lists"><!--Lista/tabla-->
+
+    <table id="lists" class="tabla2">
+        {% if lista == None%}
+<tr class="columna">
+                <th>No hay una lista que mostrar</th>
+            </tr>
+        {%else%}
+
+<tr class="columna">
+            <th>listaID</th>
+            <th>usuarioID</th>
+            <th>usuario</th>
+            <th>IDC</th>
+            <th>nombreComic</th>
+</tr>
+        {% if 'usuario' in lista %}
+            <tr class="linea">
+            <td><a title="" onclick="copiar(this)">{{lista['listaID']}}</a></td>
+            <td><a title="" onclick="copiar(this)">{{lista['usuarioID']}}</a></td>
+            <td><a title="" onclick="copiar(this)">{{lista['usuario']}}</a></td>
+            <td><a title="" onclick="copiar(this)">{{lista['IDC']}}</a></td>
+            <td><a title="" onclick="copiar(this)">{{lista['nombreComic']}}</a></td>
+
+        </tr>
+        {%else%}
+            {% for value in lista.values()%}
+            <tr class="linea">
+                <td><a title="" onclick="copiar(this)">{{value['listaID']}}</a></td>
+                <td><a title="" onclick="copiar(this)">{{value['usuarioID']}}</a></td>
+                <td><a title="" onclick="copiar(this)">{{value['usuario']}}</a></td>
+                <td><a title="" onclick="copiar(this)">{{value['IDC']}}</a></td>
+                <td><a title="" onclick="copiar(this)">{{value['nombreComic']}}</a></td>
+
+            </tr>
+            {%endfor%}
+        {%endif%}
+        {%endif%}
+
+
+    </table>
+
+</div>
+        </div>
+    </div>
+    <div class="section s2">
+        <form id="formulario2" method="post" action="/busqueda_comic" >
+    <div class="nav">
+        <p>Selecciona la columna:</p>
+        <select id="seleccion_comic" name="seleccion_comic" class="seleccion_comic" form="formulario2" required>
+            <option value="" selected hidden>---</option>
+            <option value="IDC">IDC</option>
+            <option value="nombre">Nombre</option>
+            <option value="Genero">Genero</option>
+            <option value="Autor">Autor</option>
+            <option value="Idioma">Idioma</option>
+            <option value="Estado">Estado</option>
+            <option value="ultimaEmision">Ultima Emision</option>
+            <option value="ultimoCapitulo">Ultimo Capitulo</option>
+            <option value="Pagina">Pagina</option>
+            <option value="Rating">Rating</option>
+            <option value="URL">URL</option>
+
+        </select>
+
+        <p>Que quieres buscar?</p>
+        <input id="buscar_comic" name="buscar_comic" class="buscar_comic" type="text" value="" placeholder="Buscar">
+        <div id="submit2">
+            <input type="submit" value="Buscar">
+        </div>
+    </div>
+</form>
+
+<div class="agregar_comic"><!--Comic/agregar-->
+
+    <form action="/agregar_comic" method="post">
+        <p>Agregar comic:</p>
+        <div class="comic_form">
+        <div id="agregado_comic">
+            <input id="nombre_comic" name="nombre_comic" class="input_comic" required type="text" value="" placeholder="Nombre">
+            <input id="genero_comic" name="genero_comic" class="input_comic" required type="text" value="" placeholder="Genero">
+            <input id="autor_comic" name="autor_comic" class="input_comic" required type="text" value="" placeholder="Autor">
+            <input id="idioma_comic" name="idioma_comic" class="input_comic" required type="text" value="" placeholder="Idioma">
+            <input id="estado_comic" name="estado_comic" class="input_comic" required type="text" value="" placeholder="Estado">
+            <input id="ultima_emision_comic" class="input_comic" required name="ultima_emision_comic" type="text" value="" placeholder="Ultima Emision">
+            <input id="ultimo_capitulo_comic" name="ultimo_capitulo_comic" class="input_comic" required type="text" value="" placeholder="Ultimo Capitulo">
+            <input id="pagina_comic" name="pagina_comic" class="input_comic" required type="text" value="" placeholder="Pagina">
+            <input id="rating_comic" name="rating_comic" class="input_comic" required type="text" value="" placeholder="Rating">
+            <input id="URL_comic" name="URL_comic" class="input_comic" required type="text" value="" placeholder="URL">
+        </div>
+                    <input id="submit_comic" name="submit_comic" required type="submit" value="Guardar">
+        <p></p>
+            </div>
+    </form>
+
+</div>
+<div class="comics"><!--Comics/tabla-->
+
+    <table id="comics" class="tabla3">
+
+        {% if comics == None%}
+            <tr class="columna">
+                <th>No hay ningún comic que mostrar</th>
+            </tr>
+        {%else%}
+<tr class="columna">
+            <th>IDC</th>
+            <th>Nombre</th>
+            <th>Genero</th>
+            <th>Autor</th>
+            <th>Idioma</th>
+            <th>Estado</th>
+            <th>Ultima Emision</th>
+            <th>Ultimo Capitulo</th>
+            <th>Pagina</th>
+            <th>Rating</th>
+            <th>URL</th>
+            <th>Eliminar</th>
+
+        </tr>
+        {% if 'IDC' in comics %}
+            <tr class="linea" id="comic{{comics['IDC']}}">
+            <td><a title="" onclick="copiar(this)">{{comics['IDC']}}</a></td>
+            <td><a title="" onclick="copiar(this)">{{comics['nombre']}}</a></td>
+            <td><a title="" onclick="copiar(this)">{{comics['genero']}}</a></td>
+            <td><a title="" onclick="copiar(this)">{{comics['autor']}}</a></td>
+            <td><a title="" onclick="copiar(this)">{{comics['idioma']}}</a></td>
+            <td><a title="" onclick="copiar(this)">{{comics['estado']}}</a></td>
+            <td><a title="" onclick="copiar(this)">{{comics['ultimaEmision']}}</a></td>
+            <td><a title="" onclick="copiar(this)">{{comics['ultimoCapitulo']}}</a></td>
+            <td><a title="" onclick="copiar(this)">{{comics['pagina']}}</a></td>
+            <td><a title="" onclick="copiar(this)">{{comics['rating']}}</a></td>
+            <td><a title="" onclick="copiar(this)" href="{{comics['URL']}}" target="_blank">{{comics['URL']}}</a></td>
+
+            <td><a title="" class="delete" href="javascript:void(0)" onclick="eliminar_comic({{comics['IDC']}})">Eliminar</a></td>
+        </tr>
+        {%else%}
+
+            {% for value in comics.values()%}
+            <tr class="linea" id="comic{{value['IDC']}}">
+                <td><a title="" onclick="copiar(this)">{{value['IDC']}}</a></td>
+            <td><a title="" onclick="copiar(this)">{{value['nombre']}}</a></td>
+            <td><a title="" onclick="copiar(this)">{{value['genero']}}</a></td>
+            <td><a title="" onclick="copiar(this)">{{value['autor']}}</a></td>
+            <td><a title="" onclick="copiar(this)">{{value['idioma']}}</a></td>
+            <td><a title="" onclick="copiar(this)">{{value['estado']}}</a></td>
+            <td><a title="" onclick="copiar(this)">{{value['ultimaEmision']}}</a></td>
+            <td><a title="" onclick="copiar(this)">{{value['ultimoCapitulo']}}</a></td>
+            <td><a title="" onclick="copiar(this)">{{value['pagina']}}</a></td>
+            <td><a title="" onclick="copiar(this)">{{value['rating']}}</a></td>
+            <td><a title="" onclick="copiar(this)" href="{{value['URL']}}" target="_blank">{{value['URL']}}</a></td>
+
+            <td><a title="" class="delete" href="javascript:void(0)" onclick="eliminar_comic({{value['IDC']}})">Eliminar</a></td>
+            </tr>
+            {%endfor%}
+        {%endif%}
+        {%endif%}
+
+    </table>
+
+</div>
+    </div>
+</div>
+    <script src="..\static\JS\scroll.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="../static/img/Logo.PNG">
+    <link rel="stylesheet" href="..\..\static\css\home.css" type="text/css">
+    <link rel="stylesheet" href="..\static\css\MENU.css" type="text/css">
+        <link rel="stylesheet" href="..\static\css\general.css" type="text/css">
+        <link rel="stylesheet" href="..\static\css\scroll.css" type="text/css">
+
+    <script src="..\static\JS\MENU.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/fullpage.min.js" integrity="sha512-gSf3NCgs6wWEdztl1e6vUqtRP884ONnCNzCpomdoQ0xXsk06lrxJsR7jX5yM/qAGkPGsps+4bLV5IEjhOZX+gg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="..\static\JS\home.js"></script>
+    <script src="..\static\JS\general.js"></script>
+    <script src="..\static\JS\jquery-3.6.0.js"></script>
+
+    <script>
+    {% if error%}
+    alert("{{error}}")
+    {%endif%}
+
+    </script>
+
+    <title>Comics</title>
+
+</head>
+
+<body onload="back('{{fondo}}')">
+<div id="fullpage">
+<div class="section s1" id="inicio">
+<div id="sidebar" class="sidebar">
+    <a href="#" id="boton" class="boton-cerrar" onclick="ocultar()"><img id="imagen" src="../static/img/Logo.PNG"></a>
+<ul class="menu">
+    <li>
+        <details>
+        <summary>Fondo</summary>
+
+        <div class="details-content">
+            <h1>Elige un fondo:</h1>
+            <img class="imagen_fondo" onclick="cambiar_fondo(0)" src="../static/img/8b147f90e02a61d267600245b4541f64.jpg">
+            <img class="imagen_fondo" onclick="cambiar_fondo(1)" src="../static/img/descarga1.jpg">
+            <img class="imagen_fondo" onclick="cambiar_fondo(2)" src="../static/img/descarga2.jpg">
+            <img class="imagen_fondo" onclick="cambiar_fondo(3)" src="../static/img/animeScenary.jpg">
+
+        </div>
+
+    </details>
+    </li>
+    <li><a href="/account">Opciones</a></li>
+    {% if rol == 'Administrador'%}
+        <li><a href="/admin">Herramientas Administrativas</a></li>
+{%endif%}
+    <li><a id="logout" href="{{ url_for('logout') }}">CERRAR SESIÓN</a></li>
+</ul>
+
+</div>
+
+<div id="contenido">
+  <a id="menu" class="cerrado" href="javascript:void(0)" onclick="mostrar()"><img class="imagen_menu" src="../static/img/Logo.PNG"></a>
+</div>
+
+
+
+<form action="process_url" method="post" name="URL">
+    <label for="URL">
+            <input class="submit_on_enter" id="URL" name="URL" placeholder="Ingresa Una URL" size="30" type="text" value="" />
+    </label>
+</form>
+
+<div class="wrapper">
+    <div class="typing-demo">
+     Lista:
+    </div>
+</div>
+
+<div class="lista">
+    <div class="flex-container" id="lista">
+        {% if lista == None %}
+        <div class="div_iran"> <p class="iran">Aquí irán tus comics</p>
+        </div>
+        {%else%}
+            {% if 'IDC' in lista%}
+            {% if lista['explicito'] == 1 and contenido == 0%}
+            <div class="comic" id="IDCB{{lista['IDC']}}">
+                <div class="paragraph_list">
+            <p>Nombre: {{value['nombre']}}</p>
+            <p class="bloqueado">BLOQUEADO</p>
+            <p class="bloqueado">CONTENIDO EXPLICITO</p>
+            </div>
+                <button class="boton_borrar" onclick="eliminar_lista({{lista['IDC']}});">X</button>
+            </div>
+            {%else%}
+            <div class="comic" id="IDC{{lista['IDC']}}">
+            <div class="paragraph_list">
+            <p>Nombre: {{lista['nombre']}}</p>
+            <p>IDC: {{lista['IDC']}}</p>
+            <p class="{{lista['estado']}}">Estado:{{lista['estado']}}</p>
+            <p>Capitulo:{{lista['ultimoCapitulo']}}</p>
+            </div>
+             <button class="boton_borrar" onclick="eliminar_lista({{lista['IDC']}});">X</button>
+
+            </div>
+            {%endif%}
+        {%else%}
+        {% for value in lista.values() %}
+            {% if value['explicito'] == 1 and contenido == 0%}
+            <div class="comic" id="IDCB{{value['IDC']}}">
+                <div class="paragraph_list">
+            <p class="bloqueado">Nombre: {{value['nombre']}}</p>
+            <p class="bloqueado">BLOQUEADO</p>
+            <p class="bloqueado">CONTENIDO EXPLÍCITO</p>
+            </div>
+                <button class="boton_borrar" onclick="eliminar_lista({{value['IDC']}});">X</button>
+            </div>
+
+            {%else%}
+            <div class="comic" id="IDC{{value['IDC']}}">
+            <div class="paragraph_list">
+            <p>Nombre: {{value['nombre']}}</p>
+            <p>IDC: {{value['IDC']}}</p>
+            <p class="{{value['estado']}}">Estado:{{value['estado']}}</p>
+            <p>Capitulo:{{value['ultimoCapitulo']}}</p>
+            </div>
+             <button class="boton_borrar" onclick="eliminar_lista({{value['IDC']}});">X</button>
+            </div>
+            {%endif%}
+        {% endfor %}
+        {%endif%}
+        {%endif%}
+    </div>
+
+
+
+
+</div>
+</div>
+
+    <div class="section s2">
+<div id="recomendados">
+<article>
+  <h1>RECOMENDADOS</h1>
+</article>
+</div>
+       <! –– aca van los recomendados, como es obvio, tienen que tener una portada con el nombre encima (el cual no cambia)
+        además de que al hacerle hover se muestre una sinopsis y su género, autor e idioma
+        ––>
+        <div class="recom_main">
+        <div class="recom" id="recom1">
+            <div class="container-text">
+                <p class="titulo">{{data_recom[0]['nombre']}}</p></div>
+
+            <div class="recom_img" style="background-image:url({{port1}});">
+                <div class="top">Top 1!</div></div>
+    <div class="recom_text">
+        <p class="veces_guardado">Veces Guardado:{{data_recom[0]['vistas']}}</p>
+        <p class="sinopsis">{{sino1}}</p>
+        <p class="datos"> Autor: {{data_recom[0]['autor']}}<br>
+                          Genero: {{data_recom[0]['genero']}}<br>
+                          Rating: {{data_recom[0]['rating']}}<br>
+                          Capítulos: {{data_recom[0]['ultimoCapitulo']}}<br>
+                          Idioma: {{data_recom[0]['idioma']}}<br>
+                          <a href="{{data_recom[0]['URL']}}" target="_blank">Link a {{data_recom[0]['nombre']}}</a>
+                          </p>
+    </div>
+
+        </div>
+
+        <div class="recom" id="recom2">
+                  <div class="container-text">
+                <p class="titulo">{{data_recom[1]['nombre']}}</p></div>
+
+            <div class="recom_img2" style="background-image:url({{port2}});">
+                <div class="top">Top 2</div>
+            </div>
+    <div class="recom_text2">
+        <p class="veces_guardado">Veces Guardado:{{data_recom[1]['vistas']}}</p>
+        <p class="sinopsis">{{sino2}}</p>
+        <p class="datos"> Autor: {{data_recom[1]['autor']}}<br>
+                          Genero: {{data_recom[1]['genero']}}<br>
+                          Rating: {{data_recom[1]['rating']}}<br>
+                          Capítulos: {{data_recom[1]['ultimoCapitulo']}}<br>
+                          Idioma: {{data_recom[1]['idioma']}}<br>
+                          <a href="{{data_recom[1]['URL']}}" target="_blank">Link a {{data_recom[1]['nombre']}}</a>
+                          </p>
+    </div>
+
+        </div>
+        <div class="recom" id="recom3">
+                  <div class="container-text">
+                <p class="titulo">{{data_recom[2]['nombre']}}</p></div>
+
+            <div class="recom_img3" style="background-image:url({{port3}});">
+                <div class="top">Top 3...</div></div>
+    <div class="recom_text3">
+        <p class="veces_guardado">Veces Guardado:{{data_recom[2]['vistas']}}</p>
+        <p class="sinopsis">{{sino3}}</p>
+        <p class="datos"> Autor: {{data_recom[2]['autor']}}<br>
+                          Genero: {{data_recom[2]['genero']}}<br>
+                          Rating: {{data_recom[2]['rating']}}<br>
+                          Capítulos: {{data_recom[2]['ultimoCapitulo']}}<br>
+                          Idioma: {{data_recom[2]['idioma']}}<br>
+                          <a href="{{data_recom[2]['URL']}}" target="_blank">Link a {{data_recom[2]['nombre']}}</a>
+                          </p>
+    </div>
+
+        </div>
+
+        </div>
+    <div class="pie_de_pagina">
+<p>Grupo: 1  Equipo: 18-Comics</p>
+        <p>Integrante: Maximiliano Da Silva</p>
+
+    </div>
+    </div>
+
+</div>
+
+<div class="logo_sembrando">
+<p>Proyecto para: </p>
+<a href="https://sembrandotic.com/?redirect=0" target="_blank"><img class="sembrando" src="static/img/sembrando.png"></a>
+</div>
+
+
+    <script src="..\static\JS\scroll.js"></script>
+</body>
+
+</html>

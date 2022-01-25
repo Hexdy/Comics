@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="../static/img/Logo.PNG">
+    <link rel="stylesheet" href="..\static\css\login.css" type="text/css">
+        <link rel="stylesheet" href="../static/css/general.css"  type="text/css">
+    <script src="..\static\JS\general.js"></script>
+    <script>
+    {% if error%}
+    alert("{{error}}")
+    {%endif%}
+
+    </script>
+    <title>Comics</title>
+</head>
+
+<body>
+<div>
+    <div class="heading">
+
+
+        <form class="login" action="" method="post">
+            <h2>Entrar</h2>
+            <main>
+                <div class="input-group input-group-lg">
+
+                    <span class="input-group-addon"></span>
+
+                    <input type="text"
+                           name="name"
+                           id="name"
+                           class="form-control"
+                           value="{{request.form.login}}"
+                           placeholder="Usuario">
+                </div>
+
+                <div class="input-group input-group-lg">
+
+                    <span class="input-group-addon"></span>
+
+                    <input type="email"
+                           name="email"
+                           id="email"
+                           class="form-control"
+                           value="{{request.form.email}}"
+                           placeholder="Correo">
+                </div>
+
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon"></span>
+
+                    <input name="password"
+                           type="password"
+                           id="password"
+                           class="form-control"
+                           value="{{request.form.password}}"
+                           placeholder="Contraseña">
+                </div>
+                        <a id="registrarse" href="{{url_for('signup')}}">Registrarse</a>
+                <button type="submit" class="float" id="button"><span>LogIn</span></button>
+            </main>
+        </form>
+
+    </div>
+</div>
+<div class="logo_sembrando">
+<p>Proyecto para: </p>
+<a href="https://sembrandotic.com/?redirect=0 " target="_blank"><img class="sembrando" src="static/img/sembrando.png"></a>
+</div>
+</body>
+</html>

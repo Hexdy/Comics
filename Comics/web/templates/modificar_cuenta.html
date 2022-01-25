@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="../static/img/Logo.PNG">
+    <link rel="icon" href="../static/img/Logo.PNG">
+    <link rel="stylesheet" href="../static/css/mod.css" type="text/css">
+    <link rel="stylesheet" href="../static/css/general.css" type="text/css">
+    <script src="../static/JS/mod.js"></script>
+    <script src="../static/JS/jquery-3.6.0.js"></script>
+    <script src="..\static\JS\general.js"></script>
+    <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js" type="text/javascript"></script>
+
+
+    <script>
+    {% if error%}
+    alert("{{error}}")
+    {%endif%}
+
+    </script>
+    <meta charset="UTF-8">
+    <title>Modificar Cuenta</title>
+</head>
+<body onload="check({{contenido}});back('{{fondo}}');">
+<div>
+<div class="atras">
+<a href="/" class="atras_btn"><span>Atras</span></a>
+</div>
+</div>
+<div>
+<form class="form_cuenta" action="/mod_user" method="post" autocomplete="off">
+        <input class="input" type="text" id="name" name="name" value="" placeholder="{{name}}" disabled="disabled">
+
+        <input class="input" type="email" id="email" name="email" value="" placeholder="{{email}}" disabled="disabled">
+
+        <input class="input" type="password" id="password" name="password" value="" placeholder="{{passwd}}" disabled="disabled">
+
+        <input class="input" type="password" id="confirm" name="confirm" value="" disabled="disabled">
+        <div class="contenido">
+            <div class="contenido-div"><p class="contenido_explicito">Contenido Explicito</p></div>
+        <div class="contenido-div"><input class="input" type="checkbox" id="content" name="content" value="result"  disabled="disabled"></div>
+        </div>
+    <input class="input" type="submit" disabled="disabled" value="Guardar Cambios">
+</form>
+</div>
+<div>
+<button id="boton" value="Cambiar" type="button" onclick="EnableDisableTextBox(this)">Modificar</button>
+</div>
+
+<p class="texto_eliminar">Escriba "<span>Deseo eliminar mi cuenta.</span>" para eliminar su cuenta de forma eterna e irrecuperable</p>
+    <input class="delete" type="text" id="delete" name="delete" value="" AUTOCOMPLETE="off">
+
+
+
+<div class="logo_sembrando">
+
+
+
+<p>Proyecto para: </p>
+<a href="https://sembrandotic.com/?redirect=0 " target="_blank"><img class="sembrando" src="static/img/sembrando.png"></a>
+</div>
+<script>
+$(".delete").on('keyup', function (e) {
+var value = $(".delete").val();
+if (e.key === 'Enter' || e.keyCode === 13) {
+    if(value === 'Deseo eliminar mi cuenta.'){
+    eliminar();
+    }else{
+    $('input.delete').effect("shake");
+    }}});
+</script>
+</body>
+</html>

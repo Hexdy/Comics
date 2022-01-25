@@ -1,0 +1,12 @@
+.section{
+height:100vh;
+scroll-snap-align: start;
+}
+#inicio{
+background-size:cover;
+}
+
+body {
+    margin: 0 0px !important;
+}
+

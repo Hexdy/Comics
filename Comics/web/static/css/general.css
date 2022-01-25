@@ -1,0 +1,88 @@
+@import url('http://fonts.cdnfonts.com/css/minecraft-4');
+
+body {
+  background-color: #cccccc;
+  height:100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: "Dank Mono", ui-monospace, monospace;
+}
+.logo_sembrando{
+bottom: 5px;
+right: 5px;
+text-align: center;
+color:black;
+text-shadow: 1px 0 0 #fff, -1px 0 0 #fff, 0 1px 0 #fff, 0 -1px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;
+position: fixed;
+font-size:120%;
+font-family: 'Minecraft', sans-serif;
+}
+.sembrando{
+height:80px;
+width:80px;
+border: 3px solid grey;
+border-radius: 5px;
+}
+.especial{
+	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 10% 100%;
+	animation: gradient 15s ease infinite;
+    overflow:hidden;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}}
+
+.atras{
+position: fixed;
+left: 100px;
+transform: translate(-50%, -50%);
+}
+.atras_btn{
+  display: block;
+  width: 200px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 140%;
+  text-decoration: none;
+  color: White;
+  border: 2px solid White;
+  letter-spacing: 2px;
+  text-align: center;
+  position: relative;
+  transition: all .35s;
+}
+
+.atras_btn span{
+  position: relative;
+  z-index: 2;
+}
+
+.atras_btn:after{
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background:rgb(127, 255, 212);
+  transition: all .35s;
+}
+
+.atras_btn:hover{
+  color: #333;
+}
+
+.atras_btn:hover:after{
+  width: 100%;
+}

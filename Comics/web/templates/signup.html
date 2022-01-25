@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro</title>
+    <link rel="icon" href="../static/img/Logo.PNG">
+    <link rel="stylesheet" href="../static/css/signup.css"  type="text/css">
+
+
+    <script src="../static/JS/signup.js">
+
+    </script>
+
+    <script>
+    {% if error%}
+    alert("{{error}}")
+    {%endif%}
+
+    </script>
+</head>
+<body>
+<div class="atras">
+<a href="/" class="atras_btn"><span>Atras</span></a>
+</div>
+<div class="user">
+    <header class="user__header">
+        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3219/logo.svg" alt="" />
+        <h1 class="user__title">Registro</h1>
+    </header>
+
+    <form class="signup" action="" method="post">
+        <div class="form__group">
+            <input id="name" name="name" type="text" placeholder="Nombre" class="form__input" value="{{request.form.name}}"/>
+        </div>
+
+        <div class="form__group">
+            <input id="email" name="email" type="email" placeholder="Correo Electronico" class="form__input" value="{{request.form.email}}"/>
+        </div>
+
+        <div class="form__group">
+            <input id="passwd" name="passwd" type="password" placeholder="Contraseña" class="form__input" value="{{request.form.passwd}}"/>
+        </div>
+        <div class="form__group">
+            <input id="confirm" name="confirm" type="password" placeholder="Contraseña" class="form__input" value="{{request.form.confirm}}"/>
+        </div>
+
+        <button class="btn" type="submit">Registrar</button>
+    </form>
+</div>
+
+</body>
+</html>
